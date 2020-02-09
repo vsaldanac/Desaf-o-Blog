@@ -11,7 +11,8 @@
               <div class="card-body">
                   <h5 class="card-title"><%= post.title %> </h5>
                   <p class="card-text"><%= post.content %></p>
-                    <div class="btn btn-info"><%= link_to  "Show", post, class: 'text-white' %></div> <%= crudPostButtons(post) %> 
+                  <p class="card-text"><small class="text-muted">Fecha de creación: <%= post.created_at %></small></p>
+                  <div class="btn btn-info"><%= link_to  "Show", post, class: 'text-white' %></div> <%= crudPostButtons(post) %> 
               </div>
             </div>
         </div>
