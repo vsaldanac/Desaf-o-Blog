@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :is_admin?, only: [:new, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -25,6 +27,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -70,5 +73,11 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :image_url, :content, :user_id)
+    end
+
+    def is_admin?
+      unless current_user.admin?
+        redirect_to root_path, notice: 'No tienes permisos de administrador.'
+      end
     end
 end

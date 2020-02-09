@@ -7,7 +7,8 @@
 
 <p>
   <strong>Image url:</strong>
-  <%= @post.image_url %>
+  
+  <%= image_tag @post.image_url %>
 </p>
 
 <p>
@@ -15,10 +16,5 @@
   <%= @post.content %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= crudPostButtons(@post) %>
 <%= link_to 'Back', posts_path %>
